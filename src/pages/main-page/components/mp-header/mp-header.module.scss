@@ -1,7 +1,7 @@
 .container {
     display: flex;
     width: 100%;
-    
+
     &__column {
         max-width: 1055px;
     }
@@ -40,6 +40,37 @@ h1 {
     font-weight: 700;
     line-height: 130%;
     padding-top: 13px;
+}
+
+@media (max-width: 1050px) {
+    .container {
+        display: flex;
+        width: calc(100% + 20px);
+
+        &__column {
+            max-width: 100%;
+        }
+    }
+
+    .container__settings {
+        display: flex;
+        justify-content: flex-end;
+        max-width: 400px;
+    }
+
+    .container__controls {
+        :first-child {
+            display: none;
+        }
+    }
+
+    h1 {
+        font-family: Inter;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%;
+    }
 }
 
 @media (max-width: 360px) {

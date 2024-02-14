@@ -2,9 +2,13 @@
 @import './fonts.scss';
 
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+html {
+    box-sizing: border-box;
+    width: 100vw;
 }
 
 #root {
@@ -19,4 +23,5 @@ body {
     font-style: normal;
     font-weight: 400;
     line-height: 130%;
+    overflow-x: hidden;
 }
