@@ -1,36 +1,36 @@
 import axios from 'axios';
 import { baseUrl } from '../config/constants';
 
-interface IUserFields {
+type IUserFields = {
   email: string;
   password: string;
 }
 
-interface ILoginUserRespose {
+type ILoginUserRespose = {
   accessToken: string;
 }
 
-interface ICheckMailSuccess {
+type ICheckMailSuccess = {
   email: string;
   message: string;
 }
 
-interface IConfirmMail {
+type IConfirmMail = {
   email: string;
   code: string;
 }
 
-interface IErrorObject {
+type IErrorObject = {
   statusCode: number;
   error: string;
   message: string;
 }
 
-interface Error {
+type Error = {
   error: IErrorObject
 }
 
-interface IChangePassword {
+type IChangePassword = {
   password: string;
   confirmPassword: string;
 }

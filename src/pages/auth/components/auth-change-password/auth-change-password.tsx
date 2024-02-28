@@ -29,7 +29,8 @@ export const AuthChangePassword: FC = () => {
         if (changePasswordStore.fulfilled.match(actionResult)) {
             navigate('/result/success-change-password');
         } else if (changePasswordStore.rejected.match(actionResult)) {
-            navigate(getServerMessage(actionResult?.payload?.statusCode as number));
+            navigate('/result/error-change-password');
+            // navigate(getServerMessage(actionResult?.payload?.statusCode as number));
         }
     };
 

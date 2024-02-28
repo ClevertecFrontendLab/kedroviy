@@ -56,10 +56,27 @@ export const AuthLogin: FC = () => {
         if (checkEmailStore.fulfilled.match(actionResult)) {
             navigate('/auth/confirm-email');
         } else if (checkEmailStore.rejected.match(actionResult)) {
+            
             if (actionResult?.payload?.statusCode === 404 && actionResult?.payload?.message !== 'Email не найден') {
                 navigate('/result/error-check-email');
             } else {
-                navigate(getServerMessage(actionResult?.payload?.statusCode as number));
+                switch (actionResult?.payload?.statusCode as number) {
+                    case 400:
+                        navigate('/result/error-login');
+                        break;
+                    case 401:
+                        navigate('/result/error-login');
+                        break;
+                    case 404:
+                        navigate('/result/error-check-email-no-exist');
+                        break;
+                    case 409:
+                        navigate('/result/error-check-email-no-exist');
+                        break;
+                    default:
+                        navigate('/result/error-check-email-no-exist');
+                        break;
+                }
             }
         }
     }
