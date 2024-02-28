@@ -1,9 +1,7 @@
 import { FC } from "react";
-import { useDispatch } from "react-redux";
 
 import styles from './result-success-change-password.module.scss';
 import { Button, Result } from "antd";
-import { revertAll } from "@redux/authSlice";
 import { useNavigate } from "react-router-dom";
 
 export const ResultSuccessChangePassword: FC = () => {

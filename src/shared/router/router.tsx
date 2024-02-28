@@ -29,18 +29,16 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
 
 const ResultRoute = ({ children }: { children: JSX.Element }) => {
     const location = useLocation();
-    const { error, status } = useSelector((state: any) => state.authSlice);
+    const { status } = useSelector((state: any) => state.authSlice);
 
-    const hasError = error;
-
-    
-    if (!hasError) {
-        return <Navigate to={"/auth"} replace state={{ from: location }} />;
-    } else if (status === 'succeeded') {
-        return children;
+    switch (status) {
+        case 'succeeded':
+            return children;
+        case 'failed':
+            return children;
+        default:
+            return <Navigate to={"/auth"} replace state={{ from: location }} />;
     }
-
-    return children;
 }
 
 const PublicRoute = ({ children }: { children: JSX.Element }) => {
@@ -70,10 +68,10 @@ export const routes = (
             <Route path='success' element={<ResultSuccessRegistration />} />
             <Route path='success-change-password' element={<ResultSuccessChangePassword />} />
             <Route path='error' element={<ResultError />} />
+            <Route path='error-user-exist' element={<ResultUserExist />} />
             <Route path='error-login' element={<ResultErrorLogin />} />
             <Route path='error-check-email' element={<ResultErrorCheckMail />} />
             <Route path='error-check-email-no-exist' element={<ResultErrorCheckMailNotExist />} />
-            <Route path='error-user-exist' element={<ResultUserExist />} />
             <Route path='error-change-password ' element={<ResultErrorChangePassword />} />
         </Route>
         <Route path='*' element={<Navigate to={PATHS.AUTH} replace />} />

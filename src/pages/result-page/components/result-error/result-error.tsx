@@ -2,16 +2,12 @@ import { FC } from "react";
 
 import styles from './result-error.module.scss';
 import { Button, Result } from "antd";
-import { revertAll } from "@redux/authSlice";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export const ResultError: FC = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     const goBack = () => {
-        dispatch(revertAll())
         navigate(-1)
     };
 
@@ -23,7 +19,7 @@ export const ResultError: FC = () => {
                 subTitle="Произошла ошибка, попробуйте отправить форму ещё раз."
                 extra={
                     <Button
-                        data-test-id='login-retry-button'
+                        data-test-id='registration-retry-button'
                         type="primary"
                         onClick={goBack}
                     >

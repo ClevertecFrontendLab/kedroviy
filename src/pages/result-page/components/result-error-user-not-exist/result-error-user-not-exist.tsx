@@ -1,14 +1,33 @@
 import { FC } from "react";
-import { useSelector } from "react-redux";
 
 import styles from './result-error-user-not-exist.module.scss';
+import { Result, Button } from "antd";
+import { useNavigate } from "react-router-dom";
 
 export const ResultErrorUserNotExist: FC = () => {
-    const { status } = useSelector((state: any) => state.authSlice);
+    const navigate = useNavigate();
+
+    const goBack = () => {
+        navigate(-1)
+    };
 
     return (
         <div className={styles.container}>
-            ErrorUserNotExist
+            <Result
+                status="error"
+                title="Данные не сохранились"
+                subTitle='Такой e-mail уже записан в системе. Попробуйте зарегистрироваться по другому e-mail.'
+                extra={
+                    <Button
+                        data-test-id='registration-retry-button'
+                        type="primary"
+                        key="console"
+                        onClick={goBack}
+                    >
+                        Попробовать снова
+                    </Button>
+                }
+            />
         </div>
     );
 };

@@ -1,11 +1,11 @@
 import { FC, useState } from "react";
-import { Button, Checkbox, Input, Form, Typography } from "antd";
+import { Button, Input, Form, Typography } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { AppDispatch } from "@redux/configure-store";
-import { changePasswordStore, registerUser, revertAll } from "@redux/authSlice";
+import { changePasswordStore } from "@redux/authSlice";
 import styles from './auth-change-password.module.scss';
 import { helpMessage } from "@pages/auth/constants";
 import { getServerMessage } from "./constants";
@@ -27,9 +27,9 @@ export const AuthChangePassword: FC = () => {
     const onFinish = async (data: { password: string; confirmPassword: string }) => {
         const actionResult = await dispatch(changePasswordStore(data));
         if (changePasswordStore.fulfilled.match(actionResult)) {
-            navigate('result/success-change-password');
+            navigate('/result/success-change-password');
         } else if (changePasswordStore.rejected.match(actionResult)) {
-            navigate('/result/error-change-password');
+            navigate(getServerMessage(actionResult?.payload?.statusCode as number));
         }
     };
 
@@ -58,10 +58,10 @@ export const AuthChangePassword: FC = () => {
                     help={helpMessage}
                     className={styles.custom_help_style}
                 >
-                    <Input.Password data-test-id='change-password' placeholder="Пароль"  />
+                    <Input.Password data-test-id='change-password' placeholder="Пароль" />
                 </Form.Item>
                 <Form.Item
-                    
+
                     name="confirmPassword"
                     rules={[
                         { required: true, message: 'Please input your password!' },

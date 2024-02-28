@@ -38,7 +38,14 @@ export const AuthRegistration: FC = () => {
         if (registerUser.fulfilled.match(actionResult)) {
             navigate('/result/success');
         } else if (registerUser.rejected.match(actionResult)) {
-            navigate(getErrorMessage(actionResult?.payload?.statusCode as number));
+            switch (actionResult.payload?.statusCode as number) {
+                case 409:
+                    navigate('/result/error-user-exist');
+                    break;
+                default:
+                    navigate('/result/error-user-exist');
+                    break;
+            }
         }
     };
 

@@ -35,7 +35,7 @@ export const AuthLogin: FC = () => {
         const { remember, ...dataToSend } = user;
         const actionResult = await dispatch(authUser(dataToSend));
         const rememberCheckbox = form.getFieldValue('remember');
-        
+
         if (authUser.fulfilled.match(actionResult)) {
             if (rememberCheckbox) {
                 localStorage.setItem('token', actionResult?.payload?.accessToken);
@@ -57,10 +57,10 @@ export const AuthLogin: FC = () => {
             navigate('/auth/confirm-email');
         } else if (checkEmailStore.rejected.match(actionResult)) {
             if (actionResult?.payload?.statusCode === 404 && actionResult?.payload?.message !== 'Email не найден') {
-                navigate('/result/error-check-email-no-exist');
-              } else {
+                navigate('/result/error-check-email');
+            } else {
                 navigate(getServerMessage(actionResult?.payload?.statusCode as number));
-              }
+            }
         }
     }
 

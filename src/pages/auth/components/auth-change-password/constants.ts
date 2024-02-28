@@ -1,9 +1,11 @@
 export const requestsStatus: { [key: number]: string } = {
-    400: '/result/error-login',
-    401: '/result/error-login',
-    404: '/result/error-check-email-no-exist',
+    400: '/result/error-change-password',
+    401: '/result/error-change-password',
+    404: '/result/error-change-password',
+    429: '/result/error-change-password',
+    500: '/result/error-change-password',
 };
 
 export const getServerMessage = (errorCode: number): string => {
-    return requestsStatus[errorCode] || '/result/error-check-email';
+    return requestsStatus[errorCode];
 }
