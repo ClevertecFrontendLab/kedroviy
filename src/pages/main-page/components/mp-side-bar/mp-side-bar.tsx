@@ -6,9 +6,17 @@ import {
 import { Menu, Button } from 'antd';
 
 import styles from './mp-side-bar.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 export const MPSideBar: React.FC = () => {
     const [collapsed, setCollapsed] = useState(false);
+    const navigation = useNavigate();
+
+    const onLogOut = () => {
+        localStorage.clear();
+        sessionStorage.clear();
+        navigation('/auth')
+    };
 
     return (
         <div className={collapsed ? styles.menu__collapsed : styles.menu}>
@@ -28,7 +36,7 @@ export const MPSideBar: React.FC = () => {
                         />}
                 </div>
                 <div className={styles.logotype__mobile}>
-                    {!collapsed ?<img
+                    {!collapsed ? <img
                         src="../../../assets/logoDefault.png"
                         alt="clevertfit logotype"
                         width='72px'
@@ -85,8 +93,10 @@ export const MPSideBar: React.FC = () => {
                     ]}
                 />
                 <div className={styles.exit}>
-                    <img src="../../../assets/exit.png" alt="exit" />
-                    {!collapsed ? <p>Выход</p> : null}
+                        <Button onClick={onLogOut} style={{border: 'none'}}>
+                            <img src="../../../assets/exit.png" alt="exit" />
+                            {!collapsed ? <span>Выход</span> : null}
+                        </Button> 
                 </div>
             </div>
             <div>
